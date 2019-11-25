@@ -135,6 +135,7 @@ public class FileGalleryAdapter extends MultiSelectionAdapter<FileGalleryAdapter
 
         super.onBindViewHolder(holder, position);
         MediaFile mediaFile = mediaFiles.get(position);
+
         if (mediaFile.getMediaType() == MediaFile.TYPE_VIDEO ||
                 mediaFile.getMediaType() == MediaFile.TYPE_IMAGE) {
             glideRequest.load(mediaFile.getUri())
@@ -155,13 +156,19 @@ public class FileGalleryAdapter extends MultiSelectionAdapter<FileGalleryAdapter
             holder.fileDuration.setVisibility(View.GONE);
         }
 
+        /*
+        *
+        * Edit by rotsendroid
+        *
+        * */
+
         if (mediaFile.getMediaType() == MediaFile.TYPE_FILE
                 || mediaFile.getMediaType() == MediaFile.TYPE_AUDIO) {
             holder.fileName.setVisibility(View.VISIBLE);
             holder.fileName.setText(mediaFile.getName());
-        } else {
+        } /*else {
             holder.fileName.setVisibility(View.GONE);
-        }
+        }*/
 
         holder.fileSelected.setVisibility(isSelected(mediaFile) ? View.VISIBLE : View.GONE);
     }

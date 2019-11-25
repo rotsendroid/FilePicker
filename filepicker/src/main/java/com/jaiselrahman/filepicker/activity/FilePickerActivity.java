@@ -55,6 +55,7 @@ import java.util.ArrayList;
 
 public class FilePickerActivity extends AppCompatActivity
         implements OnSelectionListener<FileGalleryAdapter.ViewHolder>, OnCameraClickListener {
+
     public static final String MEDIA_FILES = "MEDIA_FILES";
     public static final String SELECTED_MEDIA_FILES = "SELECTED_MEDIA_FILES";
     public static final String CONFIGS = "CONFIGS";
