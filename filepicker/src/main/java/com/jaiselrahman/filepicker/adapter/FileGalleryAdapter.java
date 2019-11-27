@@ -136,8 +136,6 @@ public class FileGalleryAdapter extends MultiSelectionAdapter<FileGalleryAdapter
         super.onBindViewHolder(holder, position);
         MediaFile mediaFile = mediaFiles.get(position);
 
-        holder.fileName.setVisibility(View.VISIBLE);
-        holder.fileName.setText(mediaFile.getName());
 
         if (mediaFile.getMediaType() == MediaFile.TYPE_VIDEO ||
                 mediaFile.getMediaType() == MediaFile.TYPE_IMAGE) {
@@ -160,18 +158,27 @@ public class FileGalleryAdapter extends MultiSelectionAdapter<FileGalleryAdapter
         }
 
         /*
-        *
         * Edit by rotsendroid
         * move statements to lines 139, 140
         * */
 
-        /*if (mediaFile.getMediaType() == MediaFile.TYPE_FILE
+        if (mediaFile.getMediaType() == MediaFile.TYPE_FILE
                 || mediaFile.getMediaType() == MediaFile.TYPE_AUDIO) {
-            holder.fileName.setVisibility(View.VISIBLE);
-            holder.fileName.setText(mediaFile.getName());
+            // Solve the filename problem appeared in API <= 24
+            String fname = mediaFile.getName();
+            if (fname == "" || fname == null ){
+                String[] pathName = mediaFile.getPath().split("/");
+                String otherFname = pathName[pathName.length-1];
+                holder.fileName.setText(otherFname);
+            } else {
+                holder.fileName.setVisibility(View.VISIBLE);
+                holder.fileName.setText(mediaFile.getName());
+            }
+
+
         } else {
             holder.fileName.setVisibility(View.GONE);
-        }*/
+        }
 
         holder.fileSelected.setVisibility(isSelected(mediaFile) ? View.VISIBLE : View.GONE);
     }
